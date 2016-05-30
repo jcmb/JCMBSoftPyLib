@@ -1,0 +1,7 @@
+Readme for JCMBSoftPyLib
+
+See the Wiki at GitHub for more information
+
+Includes tools used by general JCMBsoft python tools
+
+Install by running setup.py install
