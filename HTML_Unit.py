@@ -44,7 +44,7 @@ def output_table_row(HTML_File,Columns):
 
 
 def output_html_header(HTML_File,Title):
-   HTML_File.write('<!DOCTYPE HTML><html><head>\n')
+   HTML_File.write('<!DOCTYPE HTML><meta charset="utf-8" /><html><head>\n')
    HTML_File.write(
 """
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
