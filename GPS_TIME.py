@@ -29,6 +29,10 @@ SECONDS_IN_A_WEEK = 7 * SECONDS_IN_A_DAY;
 def GPS_Start(): # Return the Time Stamp, seconds value for the start
     return timegm ([1980,1,6,0,0,0,0]); # 6th of Jan 1980 is GPS 0 in UTC
 
+def  Seconds_To_Time (Week,Secs):
+    The_Date = Secs + GPS_Start();
+    return The_Date
+
 def  Week_Seconds_To_Time (Week,Secs):
     The_Date = (Week * SECONDS_IN_A_WEEK) + Secs + GPS_Start();
     return The_Date

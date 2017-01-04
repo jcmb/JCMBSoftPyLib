@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='JCMBSoft Python Library',
-      version='1.0',
+      version='1.11',
       description='JCMBsoft Python Library',
       author='JCMBsoft',
       author_email='Geoffrey@jcmbsoft.com',
