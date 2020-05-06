@@ -9,7 +9,7 @@
 class bf(object):
     def __init__(self,value=0,length=0):
         if length:
-            self._mask = 2L**(length)-1
+            self._mask = 2**(length)-1
         else:
             self._mask = ~0
         self._length=length
@@ -42,7 +42,7 @@ class bf(object):
     def __xor__(self, other):
         return bf((self._d ^ other & self._mask),self._length)
 
-    def __nonzero__(self):
+    def __bool__(self):
         return (self._d != 0)
 
     def __invert__(self):
@@ -68,16 +68,16 @@ class bf(object):
         return (int(self._d) >=  int(other))
 
     def __setitem__(self,index,value):
-        value    = (value&1L)<<index
-        mask     = (1L)<<index
+        value    = (value&1)<<index
+        mask     = (1)<<index
         self._d  = (self._d & ~mask) | value
 
     def __getslice__(self, start, end):
-        mask = 2L**(end - start) -1
+        mask = 2**(end - start) -1
         return (self._d >> start) & mask
 
     def __setslice__(self, start, end, value):
-        mask = 2L**(end - start) -1
+        mask = 2**(end - start) -1
         value = (value & mask) << start
         mask = mask << start
         self._d = (self._d & ~mask) | value
@@ -103,20 +103,20 @@ if __name__ == "__main__":
 
     k = bf()
     k[3:7]=5
-    print "{:04x}".format(int(k))
+    print("{:04x}".format(int(k)))
     k[3:7]=15
-    print "{:04x}".format(int(k))
+    print("{:04x}".format(int(k)))
     k = bf()
     k=bf(31)
-    print "{:04x}".format(int(k))
+    print("{:04x}".format(int(k)))
 
-    print k[3]
-    print k[5]
+    print(k[3])
+    print(k[5])
     k[7]=1
-    print k[4:8]
-    print int(k)
+    print(k[4:8])
+    print(int(k))
 
     k = bf(0xFFFF)
     k[4:8]=0x0
-    print "{:04x}".format(int(k))
+    print("{:04x}".format(int(k)))
 
