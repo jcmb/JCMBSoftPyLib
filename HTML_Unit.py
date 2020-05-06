@@ -31,11 +31,11 @@ def output_table_row(HTML_File,Columns):
             HTML_File.write('<td> True </td>\n')
          else:
             HTML_File.write('<td> False </td>\n')
-      elif isinstance(Column, basestring):
+      elif isinstance(Column, str):
 #         print "IS String"
          if Column != "":
 #            print "IS not blank String"
-            HTML_File.write('<td>'+Column.encode('utf-8')+'</td>\n')
+            HTML_File.write('<td>'+Column+'</td>\n')
          else:
             HTML_File.write('<td>&nbsp;</td>\n')
       else:
@@ -43,7 +43,7 @@ def output_table_row(HTML_File,Columns):
    HTML_File.write('</tr>\n')
 
 
-def output_html_header(HTML_File,Title):
+def output_html_header(HTML_File,Title,Refresh=None):
    HTML_File.write('<!DOCTYPE HTML><meta charset="utf-8" /><html><head>\n')
    HTML_File.write(
 """
@@ -54,6 +54,9 @@ def output_html_header(HTML_File,Title):
 """)
 
    HTML_File.write("<title>"+Title+"</title>\n")
+   if Refresh:
+      HTML_File.write('<meta http-equiv="refresh" content="{}">'.format(str(Refresh)))
+
    HTML_File.write("</head>\n")
 
 def output_html_body(HTML_File):
