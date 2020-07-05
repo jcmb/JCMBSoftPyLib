@@ -49,6 +49,10 @@ def output_html_header(HTML_File,Title,Refresh=None):
 """
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script src="/jquery.tablesorter.min.js"></script>
+<script src="/jquery.tablesorter.widgets.min.js"></script>
+<script src="/parser-date-iso8601.js"></script>
+
+
 <link rel="stylesheet" type="text/css" href="/style.css">
 <link rel="stylesheet" type="text/css" href="/css/tcui-styles.css">
 """)
