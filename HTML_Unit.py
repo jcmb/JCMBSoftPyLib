@@ -88,7 +88,7 @@ $(document).ready(function()
 {
 """)
       for Table in Tables:
-         HTML_File.write('   $("#'+ Table+ '").tablesorter();\n')
+         HTML_File.write('   $("#'+ Table+ '").tablesorter({"theme": "blue"});\n')
       HTML_File.write("""}
 );
 </script>
