@@ -94,4 +94,4 @@ $(document).ready(function()
 </script>
 """)
 
-   HTML_File.write("</div></div><</div></body></html>")
+   HTML_File.write("</div></div></div></body></html>")
