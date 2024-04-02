@@ -47,10 +47,10 @@ def output_html_header(HTML_File,Title,Refresh=None):
    HTML_File.write('<!DOCTYPE HTML><meta charset="utf-8" /><html><head>\n')
    HTML_File.write(
 """
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script src="//jquery.tablesorter.min.js"></script>
-<script src="//jquery.tablesorter.widgets.min.js"></script>
-<script src="//parser-date-iso8601.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="/jquery.tablesorter.min.js"></script>
+<script src="/jquery.tablesorter.widgets.min.js"></script>
+<script src="/parser-date-iso8601.js"></script>
 
 
 <link rel="stylesheet" type="text/css" href="/style.css">
