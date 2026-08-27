@@ -1,5 +1,23 @@
 #! /usr/bin/env python
 
+# Helper unit for creating HTML files, for reports.
+
+# Takes  a open ASCII file, HTML_File as a parameter.
+
+# Call output_html_header, followed by output_html_body
+
+# When finished output_html_footer with the array of table names. If the Table does not sort it is missing from here.
+
+# For each table call output_table_header, with Table_Name and Caption, with a array of Columns which is the column names
+
+# call output_table_row with Columns array being the values to be displaied
+
+# call output_table_footer at the end of the table.
+
+
+
+
+
 def output_table_header(HTML_File,Table_Name,Table_Caption,Columns,Width=100):
    HTML_File.write('<a name="'+Table_Name+'">\n')
    if Width==None:
@@ -43,6 +61,9 @@ def output_table_row(HTML_File,Columns):
    HTML_File.write('</tr>\n')
 
 
+# Title is the page title
+# Refresh is the auto refresh of the page, optional
+
 def output_html_header(HTML_File,Title,Refresh=None):
    HTML_File.write('<!DOCTYPE HTML><meta charset="utf-8" /><html><head>\n')
    HTML_File.write(
@@ -54,6 +75,7 @@ def output_html_header(HTML_File,Title,Refresh=None):
 
 
 <link rel="stylesheet" type="text/css" href="/style.css">
+<link rel="stylesheet" type="text/css" href="/css/theme.blue.css">
 <link rel="stylesheet" type="text/css" href="/css/tcui-styles.css">
 """)
 
@@ -62,6 +84,8 @@ def output_html_header(HTML_File,Title,Refresh=None):
       HTML_File.write('<meta http-equiv="refresh" content="{}">'.format(str(Refresh)))
 
    HTML_File.write("</head>\n")
+
+
 
 def output_html_body(HTML_File):
    HTML_File.write(

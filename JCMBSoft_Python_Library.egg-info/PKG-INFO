@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: JCMBSoft-Python-Library
+Version: 2.0
+Summary: JCMBsoft Python Library
+Home-page: https://jcmbsoft.com/
+Author: JCMBsoft
+Author-email: Geoffrey@jcmbsoft.com
+License: For JCMBsoft code, MIT For Trimble, GPL V3 for everyone else. Other code per orginal source
+Dynamic: author
+Dynamic: author-email
+Dynamic: home-page
+Dynamic: license
+Dynamic: summary
