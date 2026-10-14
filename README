@@ -4,10 +4,25 @@ See the Wiki at GitHub for more information
 
 Includes tools used by general JCMBsoft python tools
 
-Install:
+## Install
 
+On Debian/Ubuntu, plain `pip install` into system Python is blocked (PEP 668).
+Use either a virtual environment or `--break-system-packages`.
+
+### Option 1: virtual environment (recommended)
+
+    python3 -m venv .venv
+    source .venv/bin/activate
     python -m pip install .
 
 Editable (development) install:
 
     python -m pip install -e .
+
+### Option 2: system Python
+
+    python3 -m pip install --break-system-packages .
+
+Editable (development) install:
+
+    python3 -m pip install --break-system-packages -e .

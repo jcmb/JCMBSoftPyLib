@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "JCMBSoft-Python-Library"
-version = "2.02"
+version = "2.05"
 description = "JCMBsoft Python Library"
 readme = "README"
 authors = [{ name = "JCMBsoft", email = "Geoffrey@jcmbsoft.com" }]
