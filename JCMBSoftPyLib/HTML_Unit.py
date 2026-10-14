@@ -1,34 +1,45 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
+"""Helper for creating HTML report files.
 
-# Helper unit for creating HTML files, for reports.
+Takes an open text file, HTML_File, as a parameter.
 
-# Takes  a open ASCII file, HTML_File as a parameter.
+Call output_html_header, then output_html_body.
+For each table: output_table_header, output_table_row(...), output_table_footer.
+Finish with output_html_footer with the list of table names to enable sorting
+(tables omitted from that list are not made sortable).
+"""
 
-# Call output_html_header, followed by output_html_body
-
-# When finished output_html_footer with the array of table names. If the Table does not sort it is missing from here.
-
-# For each table call output_table_header, with Table_Name and Caption, with a array of Columns which is the column names
-
-# call output_table_row with Columns array being the values to be displaied
-
-# call output_table_footer at the end of the table.
+from html import escape
+import json
 
 
+def _attr(value):
+   return escape(str(value), quote=True)
 
 
+def _text(value):
+   return escape(str(value), quote=False)
 
-def output_table_header(HTML_File,Table_Name,Table_Caption,Columns,Width=100):
-   HTML_File.write('<a name="'+Table_Name+'">\n')
-   if Width==None:
-      HTML_File.write('<TABLE BORDER=1 class="tablesorter" id="'+Table_Name+'">\n')
+
+def output_table_header(HTML_File, Table_Name, Table_Caption, Columns, Width=100):
+   table_id = _attr(Table_Name)
+   if Width is None:
+      HTML_File.write(
+         '<table border="1" class="tablesorter" id="' + table_id + '">\n'
+      )
    else:
-      HTML_File.write('<TABLE BORDER=1 class="tablesorter" id="'+Table_Name+'" width=' + str(Width) +'%>\n')
-   HTML_File.write('<caption><b>' + Table_Caption+'</b></caption>\n')
+      HTML_File.write(
+         '<table border="1" class="tablesorter" id="'
+         + table_id
+         + '" width="'
+         + _attr(Width)
+         + '%">\n'
+      )
+   HTML_File.write('<caption><b>' + _text(Table_Caption) + '</b></caption>\n')
    HTML_File.write('<thead>\n')
    HTML_File.write('<tr>\n')
    for Column in Columns:
-      HTML_File.write('<th>'+Column+'</th>\n')
+      HTML_File.write('<th>' + _text(Column) + '</th>\n')
    HTML_File.write('</tr>\n')
    HTML_File.write('</thead>\n')
    HTML_File.write('<tbody>')
@@ -39,32 +50,23 @@ def output_table_footer(HTML_File):
    HTML_File.write('</table>')
 
 
-def output_table_row(HTML_File,Columns):
+def output_table_row(HTML_File, Columns):
    HTML_File.write('<tr>\n')
    for Column in Columns:
-#      HTML_File.write('<td>'+str(Column)+'</td>\n')
-#      print type(Column)
-      if type(Column) is bool:
-         if Column:
-            HTML_File.write('<td> True </td>\n')
-         else:
-            HTML_File.write('<td> False </td>\n')
+      if isinstance(Column, bool):
+         HTML_File.write('<td> True </td>\n' if Column else '<td> False </td>\n')
       elif isinstance(Column, str):
-#         print "IS String"
-         if Column != "":
-#            print "IS not blank String"
-            HTML_File.write('<td>'+Column+'</td>\n')
+         if Column != '':
+            HTML_File.write('<td>' + _text(Column) + '</td>\n')
          else:
             HTML_File.write('<td>&nbsp;</td>\n')
       else:
-         HTML_File.write('<td>'+str(Column)+'</td>\n')
+         HTML_File.write('<td>' + _text(Column) + '</td>\n')
    HTML_File.write('</tr>\n')
 
 
-# Title is the page title
-# Refresh is the auto refresh of the page, optional
-
-def output_html_header(HTML_File,Title,Refresh=None):
+def output_html_header(HTML_File, Title, Refresh=None):
+   """Title is the page title. Refresh is optional auto-refresh interval in seconds."""
    HTML_File.write('<!DOCTYPE HTML><meta charset="utf-8" /><html><head>\n')
    HTML_File.write(
 """
@@ -79,12 +81,13 @@ def output_html_header(HTML_File,Title,Refresh=None):
 <link rel="stylesheet" type="text/css" href="/css/tcui-styles.css">
 """)
 
-   HTML_File.write("<title>"+Title+"</title>\n")
+   HTML_File.write('<title>' + _text(Title) + '</title>\n')
    if Refresh:
-      HTML_File.write('<meta http-equiv="refresh" content="{}">'.format(str(Refresh)))
+      HTML_File.write(
+         '<meta http-equiv="refresh" content="' + _attr(Refresh) + '">'
+      )
 
-   HTML_File.write("</head>\n")
-
+   HTML_File.write('</head>\n')
 
 
 def output_html_body(HTML_File):
@@ -102,9 +105,9 @@ def output_html_body(HTML_File):
 <div id="main-content">
 """)
 
-def output_html_footer(HTML_File,Tables):
 
-   if Tables != []:
+def output_html_footer(HTML_File, Tables):
+   if Tables:
       HTML_File.write(
 """
 <script>
@@ -112,10 +115,14 @@ $(document).ready(function()
 {
 """)
       for Table in Tables:
-         HTML_File.write('   $("#'+ Table+ '").tablesorter({"theme": "blue"});\n')
+         HTML_File.write(
+            '   $(document.getElementById('
+            + json.dumps(str(Table))
+            + ')).tablesorter({"theme": "blue"});\n'
+         )
       HTML_File.write("""}
 );
 </script>
 """)
 
-   HTML_File.write("</div></div></div></body></html>")
+   HTML_File.write('</div></div></div></body></html>')
